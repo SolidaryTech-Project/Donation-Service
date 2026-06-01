@@ -6,3 +6,29 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+
+  # 2. Ferramentas nativas do Go
+  #    O go.mod fica em ./local, então os comandos rodam dentro desse diretório.
+  #    Requer Go instalado na máquina (language: system).
+  - repo: local
+    hooks:
+      - id: go-fmt
+        name: go fmt
+        entry: bash -c 'cd local && gofmt -l -w .'
+        language: system
+        types: [go]
+        pass_filenames: false
+      - id: go-vet
+        name: go vet
+        entry: bash -c 'cd local && go vet ./...'
+        language: system
+        types: [go]
+        pass_filenames: false
+      - id: go-mod-tidy
+        name: go mod tidy
+        entry: bash -c 'cd local && go mod tidy'
+        language: system
+        files: (\.go|go\.mod|go\.sum)$
+        pass_filenames: false

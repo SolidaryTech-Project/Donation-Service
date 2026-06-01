@@ -1,9 +1,10 @@
-#Install Local Dependencies
+# Instala as dependências locais de desenvolvimento (Go service)
 pre-commit:
-#Pre-commit - Inframap - Graphviz (to generate the diagrams)
+# Instala o pre-commit
 	sudo apt update
-	sudo apt upgrade -y
-#Install pre-commit
 	sudo apt install -y pre-commit
-#Activate pre-commit
+# Instala o Go (necessario: os hooks go fmt / go vet / go mod tidy
+# rodam via 'language: system', ou seja, usam o Go da maquina)
+	sudo apt install -y golang-go
+# Ativa os hooks no repositório
 	pre-commit install
